@@ -22,3 +22,6 @@ def login_view(request):
 
 def main_view(request):
     return render(request, "main.html")
+
+def login_page_view(request):
+    return render(request, "login.html")
