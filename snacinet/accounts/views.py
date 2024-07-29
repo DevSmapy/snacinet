@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from django.shortcuts import render
 
 @api_view(["POST"])
 def login_view(request):
@@ -18,3 +19,6 @@ def login_view(request):
         })
     else:
         return Response({"Error": "Invalid credentials"}, status=400)
+
+def main_view(request):
+    return render(request, "main.html")
