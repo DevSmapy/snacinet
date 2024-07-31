@@ -1,0 +1,21 @@
+<!-- templates/register.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+</head>
+<body>
+    <h1>Register</h1>
+    <form method="POST" action="{% url 'register' %}">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <label for="password_confirmation">Confirm Password:</label>
+        <input type="password" id="password_confirmation" name="password_confirmation" required>
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>
