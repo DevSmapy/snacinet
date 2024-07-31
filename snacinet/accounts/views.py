@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.exceptions import ValidationError
 from rest_framework import status
 
@@ -25,7 +25,7 @@ def register_view(request):
     user = User.objects.create_user(username=username, password=password)
     user.save()
 
-    return Response({"Success": "User registered successfully"}, status=status.HTTP_201_CREATED)
+    return redirect('login_page')
 
 @api_view(["POST"])
 def login_view(request):
@@ -47,3 +47,6 @@ def main_view(request):
 
 def login_page_view(request):
     return render(request, "login.html")
+
+def register_page_view(request):
+    return render(request, "register.html")
