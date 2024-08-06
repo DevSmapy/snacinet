@@ -1,0 +1,29 @@
+<!-- community/templates/community/post_create.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post</title>
+    <link rel="stylesheet" href="{% static 'community/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Create New Post</h1>
+        <a href="{% url 'post_list' %}">Back to Posts</a>
+    </header>
+
+    <main>
+        <form method="post" action="{% url 'post_create' %}">
+            {% csrf_token %}
+            {{ form.as_p }}  <!-- 폼 필드를 패러그래프 형태로 렌더링 -->
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Community App</p>
+    </footer>
+</body>
+</html>
