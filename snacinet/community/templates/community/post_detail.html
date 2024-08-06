@@ -1,0 +1,27 @@
+<!-- community/templates/community/post_detail.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }}</title>
+    <link rel="stylesheet" href="{% static 'community/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>{{ post.title }}</h1>
+        <a href="{% url 'post_list' %}">Back to Posts</a>
+    </header>
+
+    <main>
+        <p>{{ post.content }}</p>
+        <p><strong>Posted by:</strong> {{ post.author.username }}</p>
+        <p><strong>Created at:</strong> {{ post.create_at }}</p>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Community App</p>
+    </footer>
+</body>
+</html>
