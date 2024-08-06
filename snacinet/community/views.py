@@ -1,23 +1,33 @@
 # community/views.py
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post, Comment
-from .forms import CommentForm
 
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Post
+from .forms import PostForm
+from django.contrib.auth.decorators import login_required
+
+
+@login_required
 def post_list(request):
     posts = Post.objects.all()
     return render(request, 'community/post_list.html', {'posts': posts})
 
-def post_detail(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-    comments = post.comments.all()
+
+@login_required
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'community/post_detail.html', {'post': post})
+
+
+@login_required
+def post_create(request):
     if request.method == 'POST':
-        form = CommentForm(request.POST)
+        form = PostForm(request.POST)
         if form.is_valid():
-            comment = form.save(commit=False)
-            comment.post = post
-            comment.author = request.user
-            comment.save()
-            return redirect('post_detail', post_id=post.id)
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('post_list')
     else:
-        form = CommentForm()
-    return render(request, 'community/post_detail.html', {'post': post, 'comments': comments, 'form': form})
+        form = PostForm()
+
+    return render(request, 'community/post_create.html', {'form': form})
