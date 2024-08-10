@@ -24,4 +24,5 @@ urlpatterns = [
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("", include("accounts.urls")),
     path("community/", include("community.urls")),
+    path("cinevault/", include("cinevault.urls")),
 ]
